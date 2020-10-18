@@ -72,10 +72,12 @@ dates.foreach { date =>
       .withColumnRenamed("position", "homePosition")
       .drop("team") //.drop("homeTeam").drop("awayTeam")
 
-    allDataDF = allDataDF.union(allMatchesDf)
+    allMatchesDf.write.format("csv").mode(SaveMode.Append).save("/Users/paula/brian/csv/AllPremierLeagueData")
+    //allDataDF.write.format("csv").mode('overwrite').option('sep',',').save('file:///home/tangr/output.csv')
+//    allDataDF = allDataDF.union(allMatchesDf)
   }
 }
 //allDataDF.filter("score !=''")
 //allDataDF.write.format("org.apache.spark.sql.json").mode(SaveMode.Append).save("/Users/paula/brian/json/AllPremierLeagueData.txt")
-allDataDF.write.csv("/Users/paula/brian/csv/AllPremierLeagueData")
+//allDataDF.write.csv("/Users/paula/brian/csv/AllPremierLeagueData")
 spark.close()
